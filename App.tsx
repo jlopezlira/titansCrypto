@@ -1,51 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { Alert } from 'react-native';
+
+import CTAButton from './src/components/CTAButton';
+import Stepper from './src/components/Stepper';
+import Layout from './src/layout';
 
 export default function App() {
-  const SharedValues = () => {
-    const randomWidth = useSharedValue(10);
-
-    const config = {
-      duration: 500,
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-    };
-
-    const myStyle = useAnimatedStyle(() => {
-      return {
-        width: withTiming(randomWidth.value, config),
-        height: 20,
-        backgroundColor: 'green',
-      };
-    });
-
-    return (
-      <>
-        <Text>Shared Values</Text>
-        <Animated.View style={myStyle} />
-        <Button title="Change" onPress={() => (randomWidth.value = Math.random() * 350)} />
-      </>
-    );
-  };
-
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        <SharedValues />
-      </View>
+      <Layout>
+        <CTAButton id="home" primary title="CTA" onPress={() => Alert.alert('Pressed')} />
+        <Stepper steps={3} currentStep={0} onPress={(step) => Alert.alert(`Pressed ${step}`)} />
+      </Layout>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
-});
