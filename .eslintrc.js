@@ -1,8 +1,12 @@
 module.exports = {
-  extends: ['universe', 'universe/shared/typescript-analysis', 'plugin:react-hooks/recommended'],
+  extends: [
+    'universe',
+    'universe/shared/typescript-analysis',
+    'plugin:react-hooks/recommended',
+  ],
   overrides: [
     {
-      files: ['*.ts', '*.tsx', '*.d.ts'],
+      files: ['*.ts', '*.tsx', '*.d.ts', '*.json'],
       parserOptions: {
         project: './tsconfig.json',
       },
